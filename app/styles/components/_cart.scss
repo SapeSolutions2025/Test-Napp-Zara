@@ -1,0 +1,169 @@
+.cart {
+  min-height: calc(100vh - 60px);
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
+  
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+  }
+  
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  
+  &__count {
+    color: #666;
+  }
+  
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  
+  &__footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2rem;
+    border-top: 1px solid #e0e0e0;
+    
+    @media (max-width: 768px) {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      width: 100%;
+      
+      .cart__total {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+        order: -1;
+      }
+      
+      .cart__continue {
+        width: 100%;
+        order: 1;
+      }
+      .cart__pay {
+        width: 100%;
+        order: 2;
+      }
+    }
+  }
+
+  &__total {
+    font-size: 0.875rem;
+    span {
+      font-weight: 500;
+    }
+  }
+  
+  &__continue {
+    padding: 1rem 2rem;
+    border: 1px solid #000;
+    background: none;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    
+    &:hover {
+      background: #000;
+      color: #fff;
+    }
+  }
+  
+  &__pay {
+    padding: 1rem 3rem;
+    background: #000;
+    color: #fff;
+    border: none;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+    
+    &:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.cart-item {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  
+  &:last-child {
+    border-bottom: none;
+  }
+  
+  &__image {
+    flex: 0 0 100px;
+    width: 100px;
+    height: 100px;
+    position: relative;
+    background: #f5f5f5;
+    
+    img {
+      object-fit: contain;
+      padding: 0.5rem;
+    }
+  }
+  
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  &__name {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  &__details {
+    color: #666;
+    font-size: 0.75rem;
+  }
+  
+  &__price {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  &__remove {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    padding: 0;
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: #ff0000;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    text-transform: uppercase;
+    
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+

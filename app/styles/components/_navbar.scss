@@ -1,0 +1,19 @@
+.navbar {
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  position: relative;
+  
+  &__logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.05em;
+  }
+  
+  &__icon {
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+}

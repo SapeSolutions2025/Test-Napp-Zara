@@ -1,0 +1,50 @@
+.similar-products {
+    position: relative;
+    margin: 4rem 0;
+    
+    &__title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+    }
+    
+    &__container {
+      position: relative;
+      overflow-x: auto;
+      scrollbar-width: none; // Firefox
+      -ms-overflow-style: none; // IE and Edge
+      scroll-behavior: smooth;
+      
+      &::-webkit-scrollbar {
+        display: none; // Chrome, Safari, Opera
+      }
+    }
+    
+    &__content {
+      display: flex;
+      gap: 1rem;
+      padding-bottom: 1rem;
+      min-width: min-content;
+      
+      // Cada ProductCard dentro del carousel
+      > * {
+        flex: 0 0 280px;
+      }
+    }
+    
+    &__progress {
+      position: relative;
+      height: 2px;
+      background-color: #e0e0e0;
+      margin-top: 1rem;
+      
+      &-bar {
+        position: absolute;
+        height: 100%;
+        background-color: #000;
+        transition: width 0.3s ease;
+      }
+    }
+  }
+  
+  
