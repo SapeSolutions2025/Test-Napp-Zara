@@ -1,18 +1,27 @@
 .navbar {
   padding: 1rem;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
   position: relative;
   
-  &__logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    letter-spacing: -0.05em;
+  &__brand {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
   }
-  
+
+  &__text {
+    font-size: medium;
+    font-weight: 600;
+  }
+
   &__icon {
+    margin-right: 1.2rem;
     padding: 0.5rem;
     cursor: pointer;
   }

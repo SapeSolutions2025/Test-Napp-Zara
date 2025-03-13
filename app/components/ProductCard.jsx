@@ -1,7 +1,8 @@
-"use client";
+"use client"
+
+import "../styles/components/_product-card.scss";
 import Image from "next/image";
 import Link from "next/link";
-import "../styles/components/_product-card.scss";
 
 
 export default function ProductCard({ id, brand, name, price, imageUrl }) {
@@ -13,7 +14,7 @@ export default function ProductCard({ id, brand, name, price, imageUrl }) {
             src={imageUrl}
             alt={'imagen'}
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="product-card__image"
             priority
           />
