@@ -4,7 +4,6 @@ import "../styles/components/_similar-products.scss"
 import { useRef, useEffect, useState } from "react"
 import ProductCard from "./ProductCard"
 
-
 export default function SimilarProducts({ products, title }) {
   const containerRef = useRef(null)
   const [scrollProgress, setScrollProgress] = useState(0)

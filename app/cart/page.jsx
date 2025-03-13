@@ -1,26 +1,25 @@
 "use client";
 
+import "../styles/components/_cart.scss";
 import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
-import "../styles/components/_cart.scss";
-import { useCart } from "../context/CartContext";
-import { ArrowLeft } from "lucide-react";
+import { useCartStore } from "../hooks/cartStore";
 
 export default function Cart() {
   const router = useRouter();
-  const { items: cartItems, removeItem, clearCart, getTotalPrice } = useCart();
+  const { items: cartItems, removeItem, clearCart, getTotalPrice } = useCartStore();
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleCheckout = () => {
     setIsProcessing(true);
-    // Simulate checkout process
+    // Simulado de checkout 
     setTimeout(() => {
       clearCart();
       setIsProcessing(false);
       alert(
-        "Thank you for your purchase! This is a demo, so no actual purchase was made."
+        "Thank you for your purchase! This is a demo"
       );
     }, 2000);
   };
@@ -58,7 +57,7 @@ export default function Cart() {
                     <div className="cart-item__content">
                       <h3 className="cart-item__name">{item.name}</h3>
                       <div className="cart-item__details">
-                        {item.color} ·{" "}
+                        {item.storageOption?.capacity} {item.color}
                         {item.quantity > 1 ? `${item.quantity}x ` : ""}
                         {item.price.toFixed(2)} EUR
                       </div>
