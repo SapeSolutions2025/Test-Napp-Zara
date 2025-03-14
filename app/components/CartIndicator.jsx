@@ -5,44 +5,25 @@ import { ShoppingBag } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useCartStore } from "../hooks/cartStore";
+import { ClipLoader } from "react-spinners";
 
 export default function CartIndicator() {
-  const items = useCartStore((state) => state.items);
-  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
-  const [isPulsing, setIsPulsing] = useState(false);
-  const [prevCount, setPrevCount] = useState(0);
+  const { items: cartItems } = useCartStore();
+  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (totalItems > prevCount) {
-      setIsPulsing(true);
-      const timer = setTimeout(() => {
-        setIsPulsing(false);
-      }, 500);
-
-      return () => clearTimeout(timer);
-    }
-
-    setPrevCount(totalItems);
-  }, [totalItems, prevCount]);
+    setLoading(false);
+  }, [totalItems]);
 
   return (
     <Link href="/cart" className="navbar__icon cart-indicator">
       <ShoppingBag size={20} />
-      {totalItems > 0 ? (
-        <span
-          className={`cart-indicator__count ${
-            isPulsing ? "cart-indicator__count--pulse" : ""
-          }`}
-        >
-          {totalItems > 99 ? "99+" : totalItems}
-        </span>
+      {loading ? (
+        <ClipLoader className="cart_indicator_loader" size={15} color="#000" />
       ) : (
-        <span
-          className={`cart-indicator__count ${
-            isPulsing ? "cart-indicator__count--pulse" : ""
-          }`}
-        >
-          0
+        <span className="cart-indicator__count">
+          {totalItems > 99 ? "99+" : totalItems}
         </span>
       )}
     </Link>

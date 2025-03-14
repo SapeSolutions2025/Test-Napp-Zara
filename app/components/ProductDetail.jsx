@@ -1,12 +1,11 @@
 "use client";
 
 import "../styles/components/_product-detail.scss";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { useCartStore } from "../hooks/cartStore";
-import Navbar from "./Navbar";
 import SimilarProducts from "./SimilarProducts";
 import ProductSpecs from "./ProductSpecs";
 
@@ -17,39 +16,32 @@ export default function ProductDetail({ product }) {
     product?.colorsOptions?.[0] || null
   );
   const [selectedStorage, setSelectedStorage] = useState(null);
-  const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCartStore();
-
-  console.log({product})
+  const [isPending, startTransition] = useTransition();
 
   const handleAddToCart = () => {
-    if (product && selectedColor !== null && selectedStorage) {
-      addItem({
-        id: product.id,
-        brand: product.brand,
-        name: product.name,
-        price: selectedStorage.price,
-        color: product.colorOptions[selectedColor].name,
-        colorValue: product.colorOptions[selectedColor].hexCode,
-        image: product.colorOptions[selectedColor].imageUrl,
-      });
-
-      setAddedToCart(true);
-      setTimeout(() => {
-        setAddedToCart(false);
-      }, 2000);
-    }
+    startTransition(() => {
+      if (product && selectedColor !== null && selectedStorage) {
+        addItem({
+          id: product.id,
+          brand: product.brand,
+          name: product.name,
+          price: selectedStorage.price,
+          color: product.colorOptions[selectedColor].name,
+          colorValue: product.colorOptions[selectedColor].hexCode,
+          image: product.colorOptions[selectedColor].imageUrl,
+          storage: selectedStorage.capacity,
+        });
+      }
+    });
   };
 
   const isAddToCartDisabled =
-    selectedColor === null || selectedStorage === null;
+  selectedColor === null || selectedStorage === null;
 
   return (
-    <main>
-      <div className="sticky-header">
-        <Navbar />
-      </div>
-      <div className="container">
+    <>
+      <div className="back-button-container">
         <button
           onClick={() => router.back()}
           className="back-button"
@@ -58,7 +50,8 @@ export default function ProductDetail({ product }) {
           <ArrowLeft size={24} />
           BACK
         </button>
-
+      </div>
+      <div className="container">
         <div className="product-detail">
           <div className="product-detail__container">
             <div className="product-detail__images">
@@ -69,7 +62,7 @@ export default function ProductDetail({ product }) {
                 }
                 alt={product.name}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes="(max-width: 768px) 260px, (max-width: 1024px) 373px, 510px"
                 className="product-detail__image"
                 priority
               />
@@ -82,7 +75,9 @@ export default function ProductDetail({ product }) {
               </div>
 
               <div className="product-detail__storage">
-                <div className="product-detail__section-title">STORAGE ¿HOW MUCH SPACE DO YOU NEED?</div>
+                <div className="product-detail__section-title">
+                  STORAGE ¿HOW MUCH SPACE DO YOU NEED?
+                </div>
                 <div className="product-detail__storage-options">
                   {product.storageOptions.map((option) => (
                     <button
@@ -101,7 +96,9 @@ export default function ProductDetail({ product }) {
               </div>
 
               <div className="product-detail__colors">
-                <div className="product-detail__section-title">COLOR, PICK YOUR FAVORITE</div>
+                <div className="product-detail__section-title">
+                  COLOR, PICK YOUR FAVORITE
+                </div>
                 <div className="product-detail__colors-options">
                   {product.colorOptions.map((color, index) => (
                     <button
@@ -114,19 +111,19 @@ export default function ProductDetail({ product }) {
                     ></button>
                   ))}
                 </div>
-                <div className="product-detail__colors-name">{product.colorOptions[selectedColor]?.name}</div>
+                <div className="product-detail__colors-name">
+                  {product.colorOptions[selectedColor]?.name}
+                </div>
               </div>
 
               <button
-                className={`product-detail__button ${
-                  addedToCart ? "product-detail__button--added" : ""
-                } ${
+                className={`product-detail__button  ${
                   isAddToCartDisabled ? "product-detail__button--disabled" : ""
                 }`}
                 onClick={handleAddToCart}
                 disabled={isAddToCartDisabled}
               >
-                {addedToCart ? "ADDED TO CART ✓" : "ADD TO CART"}
+                {isPending ? "ADDING..." : "ADD TO CART"}
               </button>
             </div>
           </div>
@@ -139,6 +136,6 @@ export default function ProductDetail({ product }) {
           )}
         </div>
       </div>
-    </main>
+    </>
   );
 }

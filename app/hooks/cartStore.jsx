@@ -3,67 +3,41 @@ import { persist, createJSONStorage } from "zustand/middleware";
 
 export const useCartStore = create(
   persist(
-    (set, get) => ({
+    (set) => ({
       items: [],
-      isHydrated: false,
-      
       addItem: (item) => {
         set((state) => {
-          const existingItemIndex = state.items.findIndex(
-            (i) => i.id === item.id && i.color === item.color
+          const existingItem = state.items.find(
+            (i) => i.id === item.id && i.color === item.color && i.storage === item.storage
           );
 
-          if (existingItemIndex >= 0) {
-            // Incrementar cantidad
-            const updatedItems = [...state.items];
-            updatedItems[existingItemIndex] = {
-              ...updatedItems[existingItemIndex],
-              quantity: updatedItems[existingItemIndex].quantity + 1,
-            };
-            return { items: updatedItems };
-          } else {
-            // Agregar nuevo item
-            return { items: [...state.items, { ...item, quantity: 1 }] };
-          }
-        });
-      },
-      
-      removeItem: (id, color) => {
-        set((state) => ({
-          items: state.items.filter((item) => !(item.id === id && item.color === color)),
-        }));
-      },
-      
-      updateQuantity: (id, color, quantity) => {
-        set((state) => {
-          if (quantity <= 0) {
+          if (existingItem) {
             return {
-              items: state.items.filter((item) => !(item.id === id && item.color === color)),
+              items: state.items.map((i) =>
+                i.id === item.id && i.color === item.color && i.storage === item.storage
+                  ? { ...i, quantity: i.quantity + 1 }
+                  : i
+              ),
             };
+          } else {
+            return { items: [...state.items, { ...item, quantity: 1, cartId: crypto.randomUUID() }] };
           }
-          return {
-            items: state.items.map((item) =>
-              item.id === id && item.color === color ? { ...item, quantity } : item
-            ),
-          };
         });
+      },
+      
+      removeItem: (id, color,storage) => {
+        set((state) => ({
+          items: state.items.filter((item) => !(item.id === id && item.color === color && item.storage === storage)),
+        }));
       },
       
       clearCart: () => {
         set({ items: [] });
       },
-      
-      getTotalPrice: () => {
-        return get().items.reduce((total, item) => total + item.price * item.quantity, 0);
-      },
-      setHydrated: () => set({ isHydrated: true }),
     }),
     {
       name: "cart-store",
       storage: createJSONStorage(() => localStorage),
-      onRehydrateStorage: () => (state) => {
-        state?.setHydrated();
-      },
     }
   )
 );

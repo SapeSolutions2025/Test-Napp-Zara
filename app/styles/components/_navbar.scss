@@ -1,11 +1,24 @@
+@use '../globals' as *;
+
 .navbar {
-  padding: 1rem;
+  padding: 1rem ;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  align-items: center;
-  background-color: #ffffff;
+  background-color: $background-color;
   position: relative;
+
+  @media (min-width: 768px) {
+    padding: 1rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 1rem 4.25rem;
+  }
+  
+  @media (min-width: 1280px) {
+    padding: 1.5rem 6.25rem;
+  }
   
   &__brand {
     padding: 0.5rem;

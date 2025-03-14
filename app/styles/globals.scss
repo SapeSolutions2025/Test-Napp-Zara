@@ -4,7 +4,6 @@ $text-color: #000000;
 $text-secondary: #666666;
 $border-color: #e5e5e5;
 $border-dark: #000000;
-
 // Mixins
 @mixin flex-center {
   display: flex;
@@ -38,9 +37,8 @@ a {
 
 // Layout
 .container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 1rem;
+  max-width: 1920px;
+  margin: auto;
 }
 
 .sticky-header {
@@ -51,27 +49,18 @@ a {
   width: 100%;
 }
 
-// Search
-.search-container {
-  padding: 1rem 0;
-}
 
-.search-input {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1.125rem;
-  border: none;
-  border-bottom: 1px solid $border-dark;
-  outline: none;
-  transition: border-color 0.3s;
-  
-  &:focus {
-    border-bottom-color: $text-color;
-  }
-}
 
 .main-content {
-  padding-top: 1rem;
+  padding: 1rem;
+
+  @media (min-width: 1028px) {
+    padding: 0rem 3rem;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 0rem 6rem;
+  }
 }
 
 .results-count {
@@ -97,7 +86,10 @@ a {
   }
   
   @media (min-width: 1280px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (min-width: 1560px) {
     grid-template-columns: repeat(5, 1fr);
   }
+  
 }
-

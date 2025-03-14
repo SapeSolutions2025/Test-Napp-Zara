@@ -1,6 +1,6 @@
 .similar-products {
     position: relative;
-    margin: 4rem 0;
+    margin: 3rem 2rem;
     
     &__title {
       font-size: 1.25rem;
@@ -11,12 +11,12 @@
     &__container {
       position: relative;
       overflow-x: auto;
-      scrollbar-width: none; // Firefox
-      -ms-overflow-style: none; // IE and Edge
+      scrollbar-width: none;
+      -ms-overflow-style: none; 
       scroll-behavior: smooth;
       
       &::-webkit-scrollbar {
-        display: none; // Chrome, Safari, Opera
+        display: none; 
       }
     }
     
@@ -26,7 +26,6 @@
       padding-bottom: 1rem;
       min-width: min-content;
       
-      // Cada ProductCard dentro del carousel
       > * {
         flex: 0 0 280px;
       }

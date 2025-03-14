@@ -1,7 +1,10 @@
 
-@import 'globals';
-@import 'components/navbar';
-@import 'components/product-card';
-@import 'components/product-detail';
-@import 'components/cart';
-@import 'components/cart-indicator';
+@use 'globals';
+@use 'components/navbar';
+@use 'components/product-card';
+@use 'components/product-detail';
+@use 'components/cart';
+@use 'components/cart-indicator';
+@use 'components/similar-products';
+@use 'components/success';
+@use 'components/search';

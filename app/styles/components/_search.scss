@@ -1,0 +1,31 @@
+@use '../globals' as *;
+
+.search-container {
+    padding: 1rem;
+
+    @media (min-width: 768px) {
+        padding: 1rem;
+      }
+      
+      @media (min-width: 1024px) {
+        padding: 1rem 4.25rem;
+      }
+      
+      @media (min-width: 1280px) {
+        padding: 1.5rem 6.25rem;
+      }
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.125rem;
+    border: none;
+    border-bottom: 1px solid $border-dark;
+    outline: none;
+    transition: border-color 0.3s;
+    
+    &:focus {
+      border-bottom-color: $text-color;
+    }
+}

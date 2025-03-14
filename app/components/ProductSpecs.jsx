@@ -1,4 +1,3 @@
-"use client";
 
 import "./../styles/components/_product-detail.scss";
 

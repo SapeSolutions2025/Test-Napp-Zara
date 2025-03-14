@@ -1,4 +1,3 @@
-"use client"
 
 import "../styles/components/_navbar.scss"
 import Link from "next/link"

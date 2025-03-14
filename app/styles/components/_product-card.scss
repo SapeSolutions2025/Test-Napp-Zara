@@ -3,9 +3,10 @@
   flex-direction: column;
   cursor: pointer;
   transition: transform 0.5s;
-  border: 1px solid #4c4c4c;
+  border: 0.5px solid #4c4c4c;
   position: relative;
   overflow: hidden;
+  padding: 1rem;
   background-color: #fff;
   
   &:hover {
@@ -31,7 +32,6 @@
     position: relative;
     width: 100%;
     aspect-ratio: 1;
-    margin-bottom: 0.5rem;
     z-index: 2;
   }
   

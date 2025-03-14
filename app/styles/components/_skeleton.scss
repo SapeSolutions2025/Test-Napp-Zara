@@ -1,0 +1,82 @@
+.skeleton {
+    margin-top: 2rem;
+    
+    &__grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+  
+      @media (min-width: 640px) { // sm
+        grid-template-columns: repeat(2, 1fr);
+      }
+  
+      @media (min-width: 768px) { // md
+        grid-template-columns: repeat(3, 1fr);
+      }
+  
+      @media (min-width: 1024px) { // lg
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  
+    &__card {
+      border: 1px solid #e5e5e5;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+  
+    &__image {
+      background-color: #e5e5e5;
+      height: 12rem;
+      width: 100%;
+    }
+  
+    &__content {
+      padding: 1rem;
+    }
+  
+    &__title {
+      height: 1.5rem;
+      background-color: #e5e5e5;
+      border-radius: 0.25rem;
+      width: 75%;
+      margin-bottom: 0.5rem;
+    }
+  
+    &__line {
+      height: 1rem;
+      background-color: #e5e5e5;
+      border-radius: 0.25rem;
+      margin-bottom: 0.25rem;
+  
+      &:nth-child(2) {
+        width: 100%;
+      }
+  
+      &:nth-child(3) {
+        width: 66%;
+        margin-bottom: 1rem;
+      }
+    }
+  
+    &__button {
+      height: 1.5rem;
+      background-color: #e5e5e5;
+      border-radius: 0.25rem;
+      width: 25%;
+    }
+  }
+  
+  // Animación de efecto "pulse"
+  @keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
