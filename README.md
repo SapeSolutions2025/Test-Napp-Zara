@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Proyecto desarrollado con Next.js y JavaScript.
 
-## Getting Started
+ ## Requisitos
 
-First, run the development server:
+Asegúrate de tener instalado:
+
+ - Node.js (versión recomendada: 18.x o superior)
+
+## Instalación
+
+Clona el repositorio y ejecuta:
+
+```bash
+npm install
+```
+
+## Ejecución en desarrollo
+
+Para iniciar el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
+El proyecto estará disponible en http://localhost:3000/
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Construcción y despliegue
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Para construir la aplicación para producción:
+```bash
+npm run build
+```
+Para ejecutar la aplicación en modo producción:
+```bash
+npm start
+```
+## Pruebas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Para ejecutar los tests:
+```bash
+npm test
+```
+## Arquitectura y estructura del proyecto
 
-## Learn More
+El proyecto sigue una arquitectura modular y desacoplada:
 
-To learn more about Next.js, take a look at the following resources:
+* services/: Contiene la lógica y las llamadas al backend. Las peticiones HTTP se manejan a través de fetchApi.js en lib/, utilizando axios.
+
+* lib/: Incluye utilidades genéricas como fetchApi.js para manejar las solicitudes a la API.
+
+* hooks/: Contiene cartStore.js, un store global manejado con Zustand para gestionar el carrito sin re-renderizaciones innecesarias.
+
+* styles/: Contiene los archivos de estilos escritos en SCSS.
+
+* pages/: Usa el sistema de rutas de Next.js para la navegación entre páginas.
+
+## Información adicional
+
+Configura la variable de entorno *NEXT_PUBLICK_API_KEY* en un archivo .env (Clave autenticación para API)
 
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
