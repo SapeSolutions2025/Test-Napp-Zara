@@ -29,7 +29,7 @@
 
 
 .cart {
-  min-height: calc(100vh - 6rem);
+  min-height: calc(100vh - var(--navbar-height, 7rem));
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -54,11 +54,12 @@
   }
   
   &__footer {
-    margin-top:auto ;
-    margin-bottom: 3.5rem;
+    margin-top:auto;
+    margin-bottom: 3rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 1rem;
     border-top: 0.5px solid #e0e0e0;
     
     @media (max-width: 768px) {
@@ -89,14 +90,14 @@
       font-weight: 500;
     }
 
-    @media (min-width: 764px) {
+    @media (min-width: 768px) {
       padding-left: 15rem;
     }
     @media (min-width: 1024px) {
-      padding-left: 28rem;
+      padding-left: 25rem;
     }
     @media (min-width: 1294px) {
-      padding-left: 45rem;
+      padding-left: 35rem;
     }
    
   }

@@ -1,6 +1,5 @@
 "use client";
 
-import "../styles/components/_product-detail.scss";
 import { useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -16,6 +15,7 @@ export default function ProductDetail({ product }) {
     product?.colorsOptions?.[0] || null
   );
   const [selectedStorage, setSelectedStorage] = useState(null);
+  const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCartStore();
   const [isPending, startTransition] = useTransition();
 
@@ -32,12 +32,17 @@ export default function ProductDetail({ product }) {
           image: product.colorOptions[selectedColor].imageUrl,
           storage: selectedStorage.capacity,
         });
+
+        setAddedToCart(true);
+        setTimeout(() => {
+          setAddedToCart(false);
+        }, 1500);
       }
     });
   };
 
   const isAddToCartDisabled =
-  selectedColor === null || selectedStorage === null;
+    selectedColor === null || selectedStorage === null;
 
   return (
     <>
@@ -117,13 +122,15 @@ export default function ProductDetail({ product }) {
               </div>
 
               <button
-                className={`product-detail__button  ${
+                className={`product-detail__button ${
+                  addedToCart ? "product-detail__button--added" : ""
+                }  ${
                   isAddToCartDisabled ? "product-detail__button--disabled" : ""
                 }`}
                 onClick={handleAddToCart}
                 disabled={isAddToCartDisabled}
               >
-                {isPending ? "ADDING..." : "ADD TO CART"}
+                {addedToCart ? "ADDED TO CART ✓" : "ADD TO CART"}
               </button>
             </div>
           </div>
@@ -131,7 +138,7 @@ export default function ProductDetail({ product }) {
           {similarProducts?.length > 0 && (
             <SimilarProducts
               products={similarProducts}
-              title="Similar Products"
+              title="SIMILAR PRODUCTS"
             />
           )}
         </div>

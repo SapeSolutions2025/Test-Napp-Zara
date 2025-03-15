@@ -1,8 +1,10 @@
+@use '../globals' as *;
+
 .back-button-container {
   padding: 0.5rem ;
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   position: relative;
 
   @media (min-width: 768px) {
@@ -27,7 +29,7 @@
   border: none;
   cursor: pointer;
   padding: 0.5rem;
-  color: #474747;
+  color: $text-secondary;
   transition: opacity 0.3s;
   z-index: 10;
   
@@ -60,7 +62,7 @@
     height: 630px;
 
     @media (max-width: 768px) {
-      padding: 0rem 8rem 0rem 0rem ;
+      padding: 0rem 8rem 0rem 2rem ;
     }
   }
   
@@ -86,14 +88,14 @@
   &__price {
     font-size: 1.25rem;
     margin-bottom: 2rem;
-    color: #333;
+    color: $text-secondary;
   }
 
   &__section-title {
     font-size: 0.875rem;
     font-weight: 400;
     margin-bottom: 1rem;
-    color: #000000;
+    color: $text-color;
   }
   
   &__storage {
@@ -125,7 +127,7 @@
     width: 100%;
     padding: 1rem;
     margin-top: 2rem;
-    background-color: #000000;
+    background-color: $background-dark-color;
     color: #ffffff;
     border: none;
     font-size: 1rem;
@@ -136,9 +138,13 @@
     &:hover:not(:disabled) {
       opacity: 0.9;
     }
+
+    &--added {
+      background-color: $text-secondary;
+    }
     
     &--disabled {
-      background-color: #cccccc;
+      background-color: $text-secondary;
       cursor: not-allowed;
     }
     
@@ -146,28 +152,25 @@
       max-width: 400px;
     }
   }
-  
-  &__specifications {
-    margin: 2rem 2.5rem 2rem 2.5rem;
-  }
+
 }
 
 .storage-option {
   padding: 1.5rem;
-  border: 1px solid #CCCC;
+  border: 1px solid $border-color;
   background: none;
   cursor: pointer;
   font-size: 0.875rem;
   transition: all 0.3s;
   
   &:hover:not(.storage-option--active) {
-    border-color: #000;
+    border-color: $border-dark;
   }
   
   &--active {
-    background-color: #000;
+    background-color: $background-dark-color;
     color: #fff;
-    border-color: #000;
+    border-color: $border-dark;
   }
 }
 
@@ -180,33 +183,61 @@
   
   &--active {
     transform: scale(1.1);
-    border-color: #000000;
+    border-color: $border-dark;
   }
 }
 
-.specifications-table {
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
-}
-
-.specifications-row {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  border-bottom: 1px solid #e0e0e0;
-  
-  &:last-child {
-    border-bottom: none;
-  }
-}
-
-.specifications-label,
-.specifications-value {
+.specifications {
   padding: 1rem;
-  font-size: 0.875rem;
+
+  @media (min-width: 768px) {
+    padding: 1rem;
+  }
+
+  @media (min-width: 1024px) {
+    padding: 1rem 4.25rem;
+  }
+
+  @media (min-width: 1280px) {
+    padding: 1.5rem 6.25rem;
+  }
+  &__title {
+    font-size: 0.875rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    color: $border-dark;
+  }
+  &__table {
+    border: 0px 0.5px solid $border-dark;
+  }
+  
+  &__row {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    border-bottom: 0.5px solid $border-dark;
+    
+    &:last-child {
+      border-bottom: none;
+    }
+  
+    @media (max-width: 768px) {
+      grid-template-columns: 150px 1fr;
+    }
+  }
+  
+  &__value {
+    padding: 1rem;
+    font-size: 0.75rem;
+  }
+  
+  &__label {
+    padding: 1rem;
+    font-size: 0.75rem;
+    text-transform:uppercase ;
+  }
+  
+
 }
 
-.specifications-label {
-  font-weight: 500;
-}
 
 

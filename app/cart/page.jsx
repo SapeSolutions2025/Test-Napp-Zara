@@ -1,7 +1,6 @@
 "use client";
 
-import "../styles/components/_cart.scss";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useCartStore } from "../hooks/cartStore";
@@ -15,6 +14,7 @@ export default function Cart() {
     0
   );
   const [isPending, startTransition] = useTransition();
+  const [isProcessing, setIsProcessing] = useState(false)
 
   const handleCheckout = () => {
     startTransition(() => {
@@ -34,9 +34,10 @@ export default function Cart() {
       };
 
       localStorage.setItem("lastOrder", JSON.stringify(orderDetails));
-
+      setIsProcessing(true)
       setTimeout(() => {
         clearCart();
+        setIsProcessing(true)
         router.push("/cart/success");
       }, 2000);
     });
@@ -85,7 +86,7 @@ export default function Cart() {
                         <button
                           className="cart-item__remove"
                           onClick={() =>
-                            removeItem(item.id, item.color, item.storage)
+                            removeItem(item.cartId)
                           }
                         >
                           Eliminar
@@ -109,9 +110,9 @@ export default function Cart() {
                 <button
                   className="cart__pay"
                   onClick={handleCheckout}
-                  disabled={isPending}
+                  disabled={isProcessing}
                 >
-                  {isPending ? "PROCESSING..." : "PAY"}
+                  {isProcessing ? "PROCESSING..." : "PAY"}
                 </button>
               </div>
             </>

@@ -1,5 +1,4 @@
 
-import "../styles/components/_navbar.scss"
 import Link from "next/link"
 import { Home } from "lucide-react"
 import CartIndicator from "./CartIndicator"

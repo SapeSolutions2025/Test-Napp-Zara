@@ -15,15 +15,17 @@
     justify-content: center;
     align-items: center;
     transition: transform 0.2s ease;
-
     min-width: 18px;
     min-height: 18px;
 
     &__loader {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      position: absolute !important;
+      top: 10px !important;
+      right: -14px !important;
+      width: 18px !important;
+      height: 18px !important;
+      min-width: 18px !important;
+      min-height: 18px !important;
     }
   }
 }

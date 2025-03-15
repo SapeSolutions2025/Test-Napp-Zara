@@ -1,14 +1,13 @@
 "use client"
 
-import "../styles/components/_product-card.scss";
 import Image from "next/image";
 import Link from "next/link";
 
 
-export default function ProductCard({ id, brand, name, price, imageUrl }) {
+export default function ProductCard({ id, brand, name, price, imageUrl, hasBorder = false }) {
   return (
-    <Link href={`/product/${id}`}>
-      <div className="product-card">
+    <Link  href={`/product/${id}`}>
+      <div className={`product-card ${hasBorder ? "product-card--border" : ""}`}>
         <div className="product-card__image-container">
           <Image
             src={imageUrl}

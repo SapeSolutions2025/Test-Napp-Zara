@@ -1,8 +1,39 @@
-import Home from "./components/Home";
-import { searchProducts } from "./services/services";
+import { Suspense } from "react";
+import { getProducts } from "./services/products";
+import SearchForm from "./components/SearchForm";
+import ProductList from "./components/ProductList";
+import ProductsGridSkeleton from "./components/skeletons/ProductsGridSkeleton";
+import "./styles/main.scss";
+import NoProductsFound from "./components/NoProductsFound";
 
-export default async function Page() {
-  const products = await searchProducts();
+async function ProductsContainer({ searchParams }) {
+  const filters = (await searchParams).search;
 
-  return <Home initialProducts={products} />;
+  const products = await getProducts(filters);
+
+  return (
+    <>
+      <div className="results-count">{`${products.length} RESULTS`}</div>
+      <div className="main-content">
+        <div className="container">
+          {products.length > 0 ? (
+            <ProductList products={products} />
+          ) : (
+            <NoProductsFound searchTerm={filters} />
+          )}
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default function HomePage({ searchParams }) {
+  return (
+    <>
+      <SearchForm />
+      <Suspense fallback={<ProductsGridSkeleton />}>
+        <ProductsContainer searchParams={searchParams} />
+      </Suspense>
+    </>
+  );
 }

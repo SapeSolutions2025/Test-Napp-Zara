@@ -9,7 +9,7 @@ import { ClipLoader } from "react-spinners";
 
 export default function CartIndicator() {
   const { items: cartItems } = useCartStore();
-  const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const totalItems = cartItems.length;
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
