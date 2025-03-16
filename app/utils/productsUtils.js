@@ -18,3 +18,4 @@ export const assignUniqueIds = (products) => {
     return product;
   });
 };
+//NO LO USARIA..

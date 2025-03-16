@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useTransition } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { useCartStore } from "../hooks/cartStore";
 
 
@@ -13,11 +13,9 @@ export default function Cart() {
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const [isPending, startTransition] = useTransition();
   const [isProcessing, setIsProcessing] = useState(false)
 
   const handleCheckout = () => {
-    startTransition(() => {
       const orderNumber = `ORD-${Math.floor(Math.random() * 1000000)
         .toString()
         .padStart(6, "0")}`;
@@ -40,7 +38,7 @@ export default function Cart() {
         setIsProcessing(true)
         router.push("/cart/success");
       }, 2000);
-    });
+  
   };
 
   return (

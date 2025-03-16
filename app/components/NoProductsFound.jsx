@@ -2,6 +2,7 @@ import { Search, RefreshCw } from "lucide-react"
 import Link from "next/link"
 
 export default function NoProductsFound({ searchTerm }) {
+  //PASAR ESTO A CASTELLANO
   return (
     <div className="no-products">
       <div className="no-products__icon">

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
@@ -17,10 +17,8 @@ export default function ProductDetail({ product }) {
   const [selectedStorage, setSelectedStorage] = useState(null);
   const [addedToCart, setAddedToCart] = useState(false);
   const { addItem } = useCartStore();
-  const [isPending, startTransition] = useTransition();
 
   const handleAddToCart = () => {
-    startTransition(() => {
       if (product && selectedColor !== null && selectedStorage) {
         addItem({
           id: product.id,
@@ -38,7 +36,7 @@ export default function ProductDetail({ product }) {
           setAddedToCart(false);
         }, 1500);
       }
-    });
+    
   };
 
   const isAddToCartDisabled =
