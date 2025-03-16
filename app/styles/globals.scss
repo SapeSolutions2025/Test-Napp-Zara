@@ -99,6 +99,7 @@ a {
   grid-template-columns: 1fr;
   margin-bottom: 4rem;
   gap:0px;
+  border: 0.25px solid $border-dark; 
   
   
   @media (min-width: 768px) {

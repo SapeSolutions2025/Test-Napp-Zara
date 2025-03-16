@@ -1,24 +1,25 @@
 import { BASE_API_URL } from "../config/api";
 import fetchApi from "../lib/fetchApi";
-import { assignUniqueIds } from "../utils/productsUtils";
+import { revalidate, unstable_cache } from "../lib/unstable_cache";
 
 const PRODUCTS_PER_PAGE = 20;
 
-export const getProducts = async (query, offset = 0) => {
+export const getProducts = unstable_cache(async (query, offset = 0, limit = PRODUCTS_PER_PAGE) => {
   try {
-    let url = `${BASE_API_URL}/products?limit=${PRODUCTS_PER_PAGE}&offset=${offset}`;
+    let url = `${BASE_API_URL}/products?limit=${limit}&offset=${offset}`;
     if (query) {
       url += `&search=${query}`;
     }
     const products = await fetchApi(url);
-    const productsWithIds = assignUniqueIds(products);
-    return productsWithIds;
+    return products;
 
   } catch (error) {
     console.error(`Error in getProducts for query "${query}":`, error);
     return [];
   }
-};
+}, (query, offset = 0, limit = PRODUCTS_PER_PAGE) =>
+  `getProducts-${query || "all"}-${offset}-${limit}`
+  , { revalidate });
 
 export const getProductById = async (id) => {
   try {

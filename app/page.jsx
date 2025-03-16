@@ -1,10 +1,10 @@
 import { Suspense } from "react";
-import { getProducts } from "./services/products";
-import SearchForm from "./components/SearchForm";
-import ProductList from "./components/ProductList";
-import ProductsGridSkeleton from "./components/skeletons/ProductsGridSkeleton";
-import "./styles/main.scss";
 import NoProductsFound from "./components/NoProductsFound";
+import ProductList from "./components/ProductList";
+import SearchForm from "./components/SearchForm";
+import ProductsGridSkeleton from "./components/skeletons/ProductsGridSkeleton";
+import { getProducts } from "./services/products";
+import "./styles/main.scss";
 
 async function ProductsContainer({ searchParams }) {
   const filters = (await searchParams).search;
@@ -16,7 +16,7 @@ async function ProductsContainer({ searchParams }) {
       <div className="results-count">{`${products.length} RESULTS`}</div>
       <div className="main-content">
         <div className="container">
-          {products.length > 0 ? (
+          {!!products.length ? (
             <ProductList products={products} />
           ) : (
             <NoProductsFound searchTerm={filters} />

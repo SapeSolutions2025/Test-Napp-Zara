@@ -89,3 +89,4 @@ export default function SimilarProducts({ products, title, initialProgress = 4})
   )
 }
 
+//Crear componente carousel...

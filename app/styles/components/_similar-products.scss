@@ -4,7 +4,6 @@
     
     &__title {
       font-size: 0.875rem;
-      margin-bottom: 1rem;
       color: #000000;
     }
     
@@ -23,7 +22,7 @@
     &__content {
       display: flex;
       gap: 1.5rem;
-      padding-bottom: 1rem;
+      padding: 1rem 0;
       min-width: min-content;
       
       > * {

@@ -11,9 +11,6 @@
   padding: 1rem;
   background-color: $background-color;
 
-  &--border {
-    border: 0.25px solid $border-dark; 
-  }
   
   &:hover {
     .product-card__overlay {
