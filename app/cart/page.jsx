@@ -1,10 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useCartStore } from "../hooks/cartStore";
-
+import { getOrderDate, getRandonNumberOrder } from "../utils/utils";
 
 export default function Cart() {
   const router = useRouter();
@@ -13,32 +13,27 @@ export default function Cart() {
     (total, item) => total + item.price * item.quantity,
     0
   );
-  const [isProcessing, setIsProcessing] = useState(false)
+
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleCheckout = () => {
-      const orderNumber = `ORD-${Math.floor(Math.random() * 1000000)
-        .toString()
-        .padStart(6, "0")}`;
+    const orderNumber = getRandonNumberOrder()
+    const orderDate =  getOrderDate()
 
-      const orderDetails = {
-        orderNumber,
-        items: cartItems,
-        total: totalPrice,
-        date: new Date().toLocaleDateString("es-ES", {
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        }),
-      };
+    const orderDetails = {
+      orderNumber,
+      items: cartItems,
+      total: totalPrice,
+      date: orderDate,
+    };
 
-      localStorage.setItem("lastOrder", JSON.stringify(orderDetails));
-      setIsProcessing(true)
-      setTimeout(() => {
-        clearCart();
-        setIsProcessing(true)
-        router.push("/cart/success");
-      }, 2000);
-  
+    localStorage.setItem("lastOrder", JSON.stringify(orderDetails));
+    setIsProcessing(true);
+    setTimeout(() => {
+      clearCart();
+      setIsProcessing(true);
+      router.push("/cart/success");
+    }, 2000);
   };
 
   return (
@@ -46,7 +41,7 @@ export default function Cart() {
       <div className="container">
         <div className="cart-header">
           <p className="cart-header__title">
-            CART{" "}
+            CARRITO{" "}
             <span className="cart-header__count">({cartItems.length})</span>
           </p>
         </div>
@@ -70,10 +65,9 @@ export default function Cart() {
                     </div>
                     <div className="cart-item__content">
                       <div className="cart-item__wrap-details">
-                        <div className="cart-item__name">{item.name}</div>
-                        <div className="cart-item__details">
+                        <div className="cart-item__name" data-testid={`cart-item-name-${item.cartId}`}>{item.name}</div>
+                        <div className="cart-item__details" data-testid={`cart-item-details-${item.cartId}`}>
                           {item.storage} / {item.color}
-                          {item.quantity > 1 ? ` x ${item.quantity}` : ""}
                         </div>
 
                         <div className="cart-item__price">
@@ -83,9 +77,8 @@ export default function Cart() {
                       <div>
                         <button
                           className="cart-item__remove"
-                          onClick={() =>
-                            removeItem(item.cartId)
-                          }
+                          onClick={() => removeItem(item.cartId)}
+                          data-testid={`remove-item-${item.cartId}`}
                         >
                           Eliminar
                         </button>
@@ -99,8 +92,9 @@ export default function Cart() {
                 <button
                   className="cart__continue"
                   onClick={() => router.push("/")}
+                  data-testid="continue-shopping"
                 >
-                  CONTINUE SHOPPING
+                  CONTINUAR COMPRANDO
                 </button>
                 <div className="cart__total">
                   TOTAL: <span>{totalPrice} EUR</span>
@@ -109,8 +103,9 @@ export default function Cart() {
                   className="cart__pay"
                   onClick={handleCheckout}
                   disabled={isProcessing}
+                  data-testid="pay-button"
                 >
-                  {isProcessing ? "PROCESSING..." : "PAY"}
+                  {isProcessing ? "PROCESANDO..." : "PAGAR"}
                 </button>
               </div>
             </>
